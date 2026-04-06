@@ -18,6 +18,20 @@ if(mobileMenuBtn) mobileMenuBtn.addEventListener('click', () => toggleMenu(true)
 if(closeMenuBtn) closeMenuBtn.addEventListener('click', () => toggleMenu(false));
 mobileLinks.forEach(link => link.addEventListener('click', () => toggleMenu(false)));
 
+// Dynamic smooth scroll with navbar offset (works on any screen size)
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        const target = document.querySelector(href);
+        if (!target) return;
+        e.preventDefault();
+        const navbarHeight = navbar ? navbar.getBoundingClientRect().height : 0;
+        const targetTop = target.getBoundingClientRect().top + window.scrollY - navbarHeight - 8;
+        window.scrollTo({ top: targetTop, behavior: 'smooth' });
+    });
+});
+
 // Navbar scroll logic
 const navbar = document.getElementById('navbar');
 const navLinks = document.getElementById('nav-links');
