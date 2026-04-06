@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casablanca Barbershop | Calidad y Estilo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-white text-zinc-900 font-['Inter'] selection:bg-zinc-900 selection:text-white">
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500 border-b border-transparent py-4 text-white">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <a href="#inicio" class="block hover:opacity-80 transition-opacity">
+                    <span class="text-2xl font-black tracking-tighter uppercase block leading-none">Casablanca</span>
+                    <span class="text-[10px] tracking-[0.4em] uppercase opacity-50 block mt-1">Barbershop</span>
+                </a>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8 text-[11px] font-bold uppercase tracking-[0.2em]" id="nav-links">
+                <a href="#inicio" class="hover:text-zinc-400 transition-colors">Inicio</a>
+                <a href="#servicios" class="hover:text-zinc-400 transition-colors">Servicios</a>
+                <a href="#galeria" class="hover:text-zinc-400 transition-colors">Galería</a>
+                <a href="#contacto" class="hover:text-zinc-400 transition-colors">Contacto</a>
+            </div>
+
+            <a href="https://wa.me/34617091500" target="_blank" id="nav-cta" class="hidden md:block px-8 py-3 bg-white text-black text-[11px] font-black uppercase tracking-widest hover:bg-zinc-200 transition-all">
+                Reservar
+            </a>
+
+            <button class="md:hidden" id="mobile-menu-btn">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 bg-black text-white z-[60] flex flex-col items-center justify-center gap-10 translate-x-full transition-transform duration-500 md:hidden">
+        <button class="absolute top-8 right-8" id="close-menu-btn">
+            <i data-lucide="x" class="w-10 h-10"></i>
+        </button>
+        <a href="#inicio" class="text-4xl font-black uppercase tracking-tighter mobile-link">Inicio</a>
+        <a href="#servicios" class="text-4xl font-black uppercase tracking-tighter mobile-link">Servicios</a>
+        <a href="#galeria" class="text-4xl font-black uppercase tracking-tighter mobile-link">Galería</a>
+        <a href="#contacto" class="text-4xl font-black uppercase tracking-tighter mobile-link">Contacto</a>
+    </div>
+
+    <main>
+        <!-- Inicio (Hero) -->
+        <section id="inicio" class="relative h-screen flex items-center justify-center overflow-hidden">
+            <!-- Video background with 70% darkness and enhanced sharpness -->
+            <video autoplay muted loop playsinline preload="auto" class="absolute top-0 left-0 w-full h-full object-cover z-0 contrast-[1.1]">
+                <source src="Video_de_Brillo_de_Imagen_Generado.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-black/70 z-10"></div>
+            
+            <div class="relative z-20 text-center text-white space-y-8 px-4 max-w-5xl">
+                <h1 class="text-6xl md:text-9xl font-black uppercase tracking-tighter leading-[0.8] flex flex-col items-center">
+                    <span class="block">Barbería</span>
+                    <span class="outline-text block" style="-webkit-text-stroke: 1.5px rgba(255,255,255,0.4); color: transparent;">con</span>
+                    <span class="block">Alma</span>
+                </h1>
+                
+                <p class="text-xs md:text-sm font-bold text-white/60 max-w-2xl mx-auto tracking-[0.3em] uppercase leading-relaxed">
+                    El punto de encuentro para el hombre con estilo en Albacete
+                </p>
+                <div class="pt-12 flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in delay-500">
+                    <a href="https://wa.me/34617091500" target="_blank" class="w-full sm:w-auto px-16 py-6 bg-white text-black font-black uppercase tracking-widest hover:bg-zinc-200 transition-all hover:-translate-y-2">
+                        Reservar Cita
+                    </a>
+                    <a href="#servicios" class="w-full sm:w-auto px-16 py-6 border border-white text-white font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all hover:-translate-y-2">
+                        Ver Servicios
+                    </a>
+                </div>
+                <p class="text-[10px] md:text-xs font-semibold text-white/50 tracking-[0.1em] uppercase max-w-lg mx-auto pt-6 animate-fade-in delay-500">
+                    Reserva, modifica o cancela tu cita al instante hablando por WhatsApp con nuestro Agente IA 24/7.
+                </p>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 animate-bounce opacity-50">
+                <i data-lucide="chevron-down" class="text-white"></i>
+            </div>
+        </section>
+
+        <!-- Servicios -->
+        <section id="servicios" class="pt-20 pb-24 bg-white scroll-mt-12">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex flex-col md:flex-row justify-between items-end gap-12 mb-16">
+                    <div class="max-w-2xl">
+                        <span class="text-[11px] font-black tracking-[0.6em] uppercase text-zinc-300 block mb-6">Excelencia en el servicio</span>
+                        <h2 class="text-7xl md:text-8xl font-black uppercase tracking-tighter text-zinc-900 leading-none">Menu de <br>Especialidades</h2>
+                    </div>
+                    <div class="max-w-sm text-right">
+                        <p class="text-zinc-500 text-sm leading-relaxed mb-6 font-medium">
+                            Especialistas en diseño de corte y cuidado de la barba. Definimos tu estilo con la máxima precisión.
+                        </p>
+                        <div class="h-1 w-20 bg-zinc-900 ml-auto"></div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-32 gap-y-12">
+                    <!-- Column 1 -->
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4 mb-6">
+                            <span class="text-4xl font-black text-zinc-100 italic">01</span>
+                            <h3 class="text-xs font-black tracking-[0.4em] uppercase text-zinc-900">Cabello & Estilo</h3>
+                        </div>
+                        
+                        <div class="group cursor-default border-b border-zinc-100 pb-4">
+                            <div class="flex justify-between items-end mb-2">
+                                <h4 class="text-2xl font-black uppercase group-hover:pl-4 transition-all duration-300">Corte Casablanca</h4>
+                                <span class="text-2xl font-black">18€</span>
+                            </div>
+                            <p class="text-zinc-400 text-xs uppercase tracking-widest font-medium">Lavado + Corte de Autor + Peinado</p>
+                        </div>
+
+                        <div class="group cursor-default border-b border-zinc-100 pb-4">
+                            <div class="flex justify-between items-end mb-2">
+                                <h4 class="text-2xl font-black uppercase group-hover:pl-4 transition-all duration-300">Skin Fade / Degradado</h4>
+                                <span class="text-2xl font-black">20€</span>
+                            </div>
+                            <p class="text-zinc-400 text-xs uppercase tracking-widest font-medium">Técnica avanzada de precisión</p>
+                        </div>
+
+                        <div class="group cursor-default border-b border-zinc-100 pb-4">
+                            <div class="flex justify-between items-end mb-2">
+                                <h4 class="text-2xl font-black uppercase group-hover:pl-4 transition-all duration-300">Corte & Tratamiento</h4>
+                                <span class="text-2xl font-black">25€</span>
+                            </div>
+                            <p class="text-zinc-400 text-xs uppercase tracking-widest font-medium">Corte + Exfoliación capilar</p>
+                        </div>
+                    </div>
+
+                    <!-- Column 2 -->
+                    <div class="space-y-6">
+                         <div class="flex items-center gap-4 mb-6">
+                            <span class="text-4xl font-black text-zinc-100 italic">02</span>
+                            <h3 class="text-xs font-black tracking-[0.4em] uppercase text-zinc-900">Barba & Cuidado</h3>
+                        </div>
+                        
+                        <div class="group cursor-default border-b border-zinc-100 pb-4">
+                            <div class="flex justify-between items-end mb-2">
+                                <h4 class="text-2xl font-black uppercase group-hover:pl-4 transition-all duration-300">Ritual de Barba</h4>
+                                <span class="text-2xl font-black">12€</span>
+                            </div>
+                            <p class="text-zinc-400 text-xs uppercase tracking-widest font-medium">Perfilado + Aceites esenciales</p>
+                        </div>
+
+                        <div class="group cursor-default border-b border-zinc-100 pb-4">
+                            <div class="flex justify-between items-end mb-2">
+                                <h4 class="text-2xl font-black uppercase group-hover:pl-4 transition-all duration-300">Afeitado Marroquí</h4>
+                                <span class="text-2xl font-black">15€</span>
+                            </div>
+                            <p class="text-zinc-400 text-xs uppercase tracking-widest font-medium">Toalla caliente + Ritual tradicional</p>
+                        </div>
+
+                        <div class="group cursor-default border-b border-zinc-100 pb-4">
+                            <div class="flex justify-between items-end mb-2">
+                                <h4 class="text-2xl font-black uppercase group-hover:pl-4 transition-all duration-300">Casablanca Combo</h4>
+                                <span class="text-2xl font-black">28€</span>
+                            </div>
+                            <p class="text-zinc-400 text-xs uppercase tracking-widest font-medium">Corte de autor + Barba completa</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Galería -->
+        <section id="galeria" class="pt-24 pb-24 bg-zinc-50 overflow-hidden scroll-mt-6">
+            <div class="max-w-7xl mx-auto px-6 mb-20">
+                <div class="text-center">
+                    <span class="text-[11px] font-black tracking-[0.6em] uppercase text-zinc-400 block mb-6">Nuestra esencia</span>
+                    <h2 class="text-7xl md:text-8xl font-black uppercase tracking-tighter text-zinc-900 leading-none mb-16">Nuestra Galería</h2>
+                    <div class="w-32 h-2 bg-black mx-auto"></div>
+                </div>
+            </div>
+            <div class="px-4">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="gallery-grid">
+                    <!-- Dynamically loaded -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Contacto -->
+        <section id="contacto" class="py-40 bg-black text-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-32">
+                    <div class="space-y-16">
+                        <div>
+                            <span class="text-[11px] font-black tracking-[0.6em] uppercase text-zinc-500 block mb-8">Contacta con nosotros</span>
+                            <h2 class="text-7xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-12">Visítanos</h2>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-12">
+                            <div class="space-y-4">
+                                <p class="text-[10px] font-black tracking-[0.4em] uppercase text-zinc-500 underline underline-offset-8 decoration-zinc-800">Dirección</p>
+                                <p class="text-xl font-bold uppercase leading-tight">C. Juan Sebastián Elcano, 59<br>02005 Albacete</p>
+                            </div>
+                            <div class="space-y-4">
+                                <p class="text-[10px] font-black tracking-[0.4em] uppercase text-zinc-500 underline underline-offset-8 decoration-zinc-800">Horario</p>
+                                <p class="text-xl font-bold uppercase leading-snug">Lun - Vie: 10:00-14:00 y 17:00-21:00<br>Sáb: 10:00 - 15:30<br>Dom: Cerrado</p>
+                            </div>
+                            <div class="space-y-4">
+                                <p class="text-[10px] font-black tracking-[0.4em] uppercase text-zinc-500 underline underline-offset-8 decoration-zinc-800">Teléfono</p>
+                                <p class="text-xl font-bold uppercase">617 09 15 00</p>
+                            </div>
+                            <div class="space-y-4">
+                                <p class="text-[10px] font-black tracking-[0.4em] uppercase text-zinc-500 underline underline-offset-8 decoration-zinc-800">Instagram</p>
+                                <p class="text-xl font-bold uppercase">@barberia.casablancaa</p>
+                            </div>
+                        </div>
+
+                        <div class="pt-8 block">
+                            <a href="https://wa.me/34617091500" class="inline-flex items-center gap-4 px-12 py-6 bg-white text-black font-black uppercase tracking-widest hover:bg-zinc-200 transition-all">
+                                <span>WhatsApp Directo</span>
+                                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                            </a>
+                            <p class="text-[10px] text-zinc-500 tracking-[0.1em] uppercase mt-4 max-w-md font-semibold">
+                                Puedes coger, modificar o cancelar tu cita hablando por WhatsApp con nuestro Agente IA. Rápido, fácil y disponible 24/7.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <a href="https://maps.google.com/maps?q=Calle+Juan+Sebastián+Elcano,+59,+02005+Albacete" target="_blank" class="relative group block">
+                         <div class="relative bg-zinc-100 aspect-[4/5] w-full flex items-center justify-center border border-zinc-600 overflow-hidden grayscale">
+                            <iframe 
+                                src="https://maps.google.com/maps?q=Calle%20Juan%20Sebasti%C3%A1n%20Elcano,%2059,%20Albacete&t=&z=16&ie=UTF8&iwloc=near&output=embed" 
+                                class="w-full h-full border-0 absolute inset-0 pointer-events-none" 
+                                allowfullscreen="" 
+                                loading="lazy">
+                            </iframe>
+                            <div class="absolute inset-0 pointer-events-none shadow-[inset_0_0_20px_rgba(0,0,0,0.1)] bg-black/0 group-hover:bg-black/10 transition-colors duration-500"></div>
+                         </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-20 bg-black text-zinc-600 border-t border-zinc-900">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col items-center justify-center gap-8 text-center">
+            <p class="text-[10px] tracking-[0.5em] uppercase">&copy; 2026 Casablanca Barbershop • Crafted with Precision</p>
+            <div class="flex gap-6 justify-center">
+                <a href="#" class="hover:text-white transition-colors cursor-pointer"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                <a href="#" class="hover:text-white transition-colors cursor-pointer"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 items-center justify-center hidden opacity-0 transition-opacity duration-300">
+        <button id="lightbox-close" class="absolute top-6 right-6 text-white/50 hover:text-white transition-colors cursor-pointer z-10">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        
+        <button id="lightbox-prev" class="absolute left-6 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors cursor-pointer z-10">
+            <i data-lucide="chevron-left" class="w-10 h-10"></i>
+        </button>
+        
+        <img id="lightbox-img" src="" alt="Gallery Fullscreen" class="max-h-[90vh] max-w-[90vw] object-contain relative z-0">
+        
+        <button id="lightbox-next" class="absolute right-6 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors cursor-pointer z-10">
+            <i data-lucide="chevron-right" class="w-10 h-10"></i>
+        </button>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
