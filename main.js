@@ -27,7 +27,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         if (!target) return;
         e.preventDefault();
         const navbarHeight = navbar ? navbar.getBoundingClientRect().height : 0;
-        const targetTop = target.getBoundingClientRect().top + window.scrollY - navbarHeight - 8;
+        // Extra breathing room per device size
+        let extraOffset = 8;
+        if (window.innerWidth >= 768 && window.innerWidth < 1024) {
+            extraOffset = 24; // tablet
+        } else if (window.innerWidth >= 1024) {
+            extraOffset = 12; // desktop
+        }
+        const targetTop = target.getBoundingClientRect().top + window.scrollY - navbarHeight - extraOffset;
         window.scrollTo({ top: targetTop, behavior: 'smooth' });
     });
 });
