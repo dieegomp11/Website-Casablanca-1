@@ -53,6 +53,36 @@ body {
     gap: 1.5rem;
 }
 
+/* ── Navbar Logo ──────────────────────────────────────────── */
+/*
+ * logo_clean.png: background removed via Pillow, white text on transparent.
+ * Hero state  → white text as-is (filter: invert(0))
+ * Scrolled    → filter: invert(1) turns white→black, smoothly transitioning through grey
+ */
+/* Mobile logo (left-aligned, smaller) */
+.nav-logo {
+    height: 40px;
+    width: auto;
+    filter: invert(0);
+    transition: filter 0.45s ease;
+    user-select: none;
+}
+
+/* Mobile logo (slightly larger than default) */
+.nav-logo--mobile {
+    height: 46px;
+}
+
+/* Desktop logo (centered, bigger) */
+.nav-logo--lg {
+    height: 58px;
+}
+
+/* Scrolled → white text becomes black */
+#navbar.glass-nav .nav-logo {
+    filter: invert(1);
+}
+
 /* Image Card Styles */
 .img-card {
     position: relative;

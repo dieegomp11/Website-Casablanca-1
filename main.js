@@ -46,37 +46,17 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Dynamic Gallery Loader
-const galleryGrid = document.getElementById('gallery-grid');
+// Gallery — static layout (cards in HTML)
 const galleryImages = [
-    'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&q=80&w=600',
-    'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&q=80&w=600',
-    'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&q=80&w=600',
-    'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&q=80&w=600'
+    'imagenes/gallery_01_portrait.jpg',
+    'imagenes/gallery_03_waiting.jpg',
+    'imagenes/gallery_02_coffee.jpg',
+    'imagenes/gallery_05_evening.jpg',
 ];
 
-galleryImages.forEach((src, index) => {
-    const card = document.createElement('div');
-    card.className = 'img-card group cursor-pointer relative';
-    card.innerHTML = `
-        <div class="aspect-square bg-zinc-200 overflow-hidden group">
-            <img 
-                src="${src}" 
-                alt="Barber style" 
-                class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-110 group-hover:grayscale-0"
-                loading="lazy"
-            >
-        </div>
-        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-             <i data-lucide="plus" class="text-white w-10 h-10"></i>
-        </div>
-    `;
+document.querySelectorAll('.gallery-card').forEach((card) => {
+    const index = parseInt(card.dataset.index, 10);
     card.addEventListener('click', () => openLightbox(index));
-    galleryGrid.appendChild(card);
 });
 
 // Lightbox Logic
