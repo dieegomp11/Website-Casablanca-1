@@ -52,6 +52,8 @@ const galleryImages = [
     'imagenes/gallery_03_waiting.jpg',
     'imagenes/gallery_02_coffee.jpg',
     'imagenes/gallery_05_evening.jpg',
+    'imagenes/gallery_06_sofa.jpg',
+    'imagenes/gallery_07_portrait2.jpg',
 ];
 
 document.querySelectorAll('.gallery-card').forEach((card) => {
