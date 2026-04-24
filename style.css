@@ -2,6 +2,8 @@
 :root {
     --bg-primary: #ffffff;
     --text-primary: #18181b;
+    --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out:  cubic-bezier(0.0, 0.0, 0.2, 1);
 }
 
 body {
@@ -9,12 +11,95 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Glassmorphism Classes */
+/* ── Film Strip ──────────────────────────────────────────────── */
+#film-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.filmstrip-row {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+/* Perforaciones de cine arriba y abajo de cada fila */
+.filmstrip-row::before,
+.filmstrip-row::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 13px;
+    z-index: 3;
+    pointer-events: none;
+    background-color: rgba(0,0,0,0.88);
+    background-image: repeating-linear-gradient(
+        to right,
+        transparent       0px,
+        transparent       9px,
+        rgba(0,0,0,0.88)  9px,
+        rgba(0,0,0,0.88) 14px
+    );
+    background-size: 23px 13px;
+}
+.filmstrip-row::before { top: 0; }
+.filmstrip-row::after  { bottom: 0; }
+
+.filmstrip-track {
+    display: flex;
+    height: 100%;
+    gap: 3px;
+    will-change: transform;
+}
+
+.film-ltr  { animation: film-ltr 32s linear infinite; }
+.film-rtl  { animation: film-rtl 40s linear infinite; }
+.film-slow { animation-duration: 54s; }
+
+@keyframes film-ltr {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+@keyframes film-rtl {
+    from { transform: translateX(-50%); }
+    to   { transform: translateX(0); }
+}
+
+.filmstrip-img {
+    height: 100%;
+    width: auto;
+    flex-shrink: 0;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(100%) contrast(1.2) brightness(0.7);
+    pointer-events: none;
+    user-select: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .filmstrip-track { animation: none !important; }
+}
+
+/* ── Grain Noise Overlay ─────────────────────────────────────── */
+#grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.028;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+}
+
+/* ── Glassmorphism Nav ───────────────────────────────────────── */
 .glass-nav {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(28px) saturate(200%);
+    -webkit-backdrop-filter: blur(28px) saturate(200%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.03), 0 8px 24px rgba(0, 0, 0, 0.05);
 }
 
 .outline-text {
@@ -26,24 +111,18 @@ body {
 .delay-500 { animation-delay: 0.5s; }
 
 /* Scroll Hide */
-::-webkit-scrollbar {
-    width: 6px;
-}
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-::-webkit-scrollbar-thumb {
-    background: #18181b;
-}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #fafafa; }
+::-webkit-scrollbar-thumb { background: #27272a; border-radius: 2px; }
 
-/* Fade In Animations */
+/* ── Hero Load-in ────────────────────────────────────────────── */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(24px); filter: blur(6px); }
+    to   { opacity: 1; transform: translateY(0);    filter: blur(0);   }
 }
 
 .animate-fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
+    animation: fadeIn 1s var(--ease-expo) forwards;
 }
 
 /* Custom Grid for Gallery */
@@ -53,13 +132,7 @@ body {
     gap: 1.5rem;
 }
 
-/* ── Navbar Logo ──────────────────────────────────────────── */
-/*
- * logo_clean.png: background removed via Pillow, white text on transparent.
- * Hero state  → white text as-is (filter: invert(0))
- * Scrolled    → filter: invert(1) turns white→black, smoothly transitioning through grey
- */
-/* Mobile logo (left-aligned, smaller) */
+/* ── Navbar Logo ─────────────────────────────────────────────── */
 .nav-logo {
     height: 40px;
     width: auto;
@@ -67,35 +140,441 @@ body {
     transition: filter 0.45s ease;
     user-select: none;
 }
+.nav-logo--mobile { height: 46px; }
+.nav-logo--lg     { height: 58px; }
 
-/* Mobile logo (slightly larger than default) */
-.nav-logo--mobile {
-    height: 46px;
+#navbar.glass-nav .nav-logo { filter: invert(1); }
+
+/* ── Scroll Reveal ───────────────────────────────────────────── */
+.reveal {
+    opacity: 0;
+    transition:
+        opacity  0.9s var(--ease-expo),
+        transform 0.9s var(--ease-expo),
+        filter   0.9s var(--ease-expo);
+    will-change: transform, opacity;
 }
 
-/* Desktop logo (centered, bigger) */
-.nav-logo--lg {
-    height: 58px;
+.reveal-up    { transform: translateY(64px); filter: blur(8px); }
+.reveal-left  { transform: translateX(-56px); filter: blur(6px); }
+.reveal-right { transform: translateX(56px);  filter: blur(6px); }
+.reveal-scale { transform: scale(0.88) translateY(32px); filter: blur(10px); }
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translate(0) scale(1);
+    filter: blur(0px);
 }
 
-/* Scrolled → white text becomes black */
-#navbar.glass-nav .nav-logo {
-    filter: invert(1);
+@media (prefers-reduced-motion: reduce) {
+    .reveal { transition: opacity 0.3s ease; }
+    .reveal-up, .reveal-left, .reveal-right, .reveal-scale {
+        transform: none;
+        filter: none;
+    }
+    .marquee-track { animation: none; }
 }
 
-/* Image Card Styles */
+/* ── Marquee Strip ───────────────────────────────────────────── */
+@keyframes marquee-scroll {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(-50%, 0, 0); }
+}
+
+.marquee-track {
+    display: flex;
+    will-change: transform;
+    animation: marquee-scroll 32s linear infinite;
+}
+
+.marquee-track:hover {
+    animation-play-state: paused;
+}
+
+/* ── Service Items — Animated Underline ─────────────────────── */
+#servicios .group.reveal {
+    border-bottom-width: 0;
+    position: relative;
+}
+
+#servicios .group.reveal::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 0;
+    background: #e4e4e7;
+    transition: width 1s var(--ease-expo);
+    transition-delay: 0.3s;
+}
+
+#servicios .group.reveal.is-visible::after {
+    width: 100%;
+}
+
+/* ── Gallery Cards ───────────────────────────────────────────── */
 .img-card {
     position: relative;
     overflow: hidden;
+    transform-style: preserve-3d;
+    /* smooth return from tilt */
+    transition: transform 0.65s var(--ease-expo), box-shadow 0.5s ease;
 }
 
 .img-card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.75s var(--ease-expo);
+    pointer-events: none;
 }
 
 .img-card:hover img {
-    transform: scale(1.1);
+    transform: scale(1.07);
 }
+
+/* tilt active → faster tracking, handled by JS */
+.img-card.tilt-active {
+    transition: transform 0.08s ease-out, box-shadow 0.2s ease;
+    box-shadow: 0 24px 48px rgba(0,0,0,0.18);
+}
+
+/* ── Button: Tactile Press ───────────────────────────────────── */
+a[href*="wa.me"],
+a[href="#servicios"],
+a[href="#inicio"] {
+    transition: all 0.4s var(--ease-expo);
+}
+
+/* Press feedback for all CTA-style links */
+.btn-cta {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.35s var(--ease-expo), background 0.3s ease;
+}
+
+.btn-cta:active {
+    transform: scale(0.97) translateY(2px) !important;
+}
+
+/* Shine sweep on hover */
+.btn-cta::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        105deg,
+        transparent 40%,
+        rgba(255,255,255,0.12) 50%,
+        transparent 60%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.55s var(--ease-expo);
+}
+
+.btn-cta:hover::after {
+    transform: translateX(100%);
+}
+
+/* ── Nav link hover underline ────────────────────────────────── */
+nav a:not(#nav-cta) {
+    position: relative;
+}
+
+nav a:not(#nav-cta)::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.35s var(--ease-expo);
+}
+
+nav a:not(#nav-cta):hover::after {
+    width: 100%;
+}
+
+/* ── Price numbers — tabular ─────────────────────────────────── */
+#servicios span.font-black {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+}
+
+/* ── Lightbox ────────────────────────────────────────────────── */
+#lightbox { z-index: 10000; }
+
+/* ══════════════════════════════════════════════════════════════
+   SPLASH SCREEN
+   ══════════════════════════════════════════════════════════════ */
+#splash {
+    position: fixed;
+    inset: 0;
+    background: #09090b;
+    z-index: 99998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.85s var(--ease-expo), visibility 0.85s;
+}
+
+#splash.splash-exit {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.splash-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+/* Logo: reveal from left like handwriting */
+.splash-logo-wrap {
+    overflow: hidden;
+    padding: 4px 0;
+}
+
+.splash-logo-img {
+    display: block;
+    width: clamp(160px, 30vw, 240px);
+    height: auto;
+    clip-path: inset(0 100% 0 0);
+    animation: splash-write 1.55s var(--ease-expo) forwards;
+    animation-delay: 0.35s;
+}
+
+@keyframes splash-write {
+    from { clip-path: inset(0 100% 0 0); }
+    to   { clip-path: inset(0 0%   0 0); }
+}
+
+/* Thin line that grows under the logo */
+.splash-line {
+    width: 0;
+    height: 1px;
+    background: rgba(255,255,255,0.15);
+    animation: splash-line-grow 0.7s var(--ease-expo) forwards;
+    animation-delay: 1.7s;
+}
+
+@keyframes splash-line-grow {
+    from { width: 0; }
+    to   { width: clamp(160px, 30vw, 240px); }
+}
+
+/* Tagline */
+.splash-tagline {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.28);
+    opacity: 0;
+    animation: splash-tag 0.55s ease forwards;
+    animation-delay: 2.2s;
+}
+
+@keyframes splash-tag {
+    from { opacity: 0; transform: translateY(5px); }
+    to   { opacity: 1; transform: translateY(0);   }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BARBER / EQUIPO SECTION
+   ══════════════════════════════════════════════════════════════ */
+.barber-card {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    cursor: pointer;
+    background: #09090b;
+}
+
+.barber-img-wrap {
+    position: absolute;
+    inset: 0;
+}
+
+/* Both images fill the card */
+.barber-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 18%;
+}
+
+/* ─ Layer 1: blurred background ─ */
+.barber-img--blur {
+    filter: blur(10px) brightness(0.6) saturate(0.75);
+    transform: scale(1.12);
+    transition: filter 0.8s var(--ease-expo), transform 1s var(--ease-expo);
+}
+
+.barber-card:hover .barber-img--blur {
+    filter: blur(5px) brightness(0.72) saturate(0.88);
+    transform: scale(1.15);
+}
+
+/* ─ Layer 2: sharp center (face) via radial mask ─ */
+/* In 1:1 format, face sits around center-top area */
+.barber-img--sharp {
+    -webkit-mask-image: radial-gradient(
+        ellipse 68% 65% at 50% 35%,
+        black 20%,
+        rgba(0,0,0,0.55) 50%,
+        transparent 72%
+    );
+    mask-image: radial-gradient(
+        ellipse 68% 65% at 50% 35%,
+        black 20%,
+        rgba(0,0,0,0.55) 50%,
+        transparent 72%
+    );
+    filter: brightness(1.05) contrast(1.1) saturate(1.05);
+    transition: filter 0.8s var(--ease-expo), transform 1s var(--ease-expo);
+    z-index: 1;
+}
+
+.barber-card:hover .barber-img--sharp {
+    filter: brightness(1.1) contrast(1.18) saturate(1.12);
+    transform: scale(1.04);
+}
+
+/* ─ Bottom gradient for text legibility ─ */
+.barber-vignette {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(
+        to top,
+        rgba(9,9,11,0.97) 0%,
+        rgba(9,9,11,0.5) 30%,
+        transparent 52%
+    );
+    pointer-events: none;
+}
+
+/* ─ Info overlay ─ */
+.barber-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    padding: 0.9rem 1rem 1rem;
+    transform: translateY(4px);
+    transition: transform 0.55s var(--ease-expo);
+}
+
+.barber-card:hover .barber-info {
+    transform: translateY(0);
+}
+
+.barber-role {
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.38);
+    margin-bottom: 5px;
+}
+
+.barber-name {
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    line-height: 1;
+}
+
+/* ─ Coming Soon card ─ */
+.barber-soon-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 65% at 50% 30%,
+        #27272a 0%,
+        #09090b 100%
+    );
+}
+
+/* Subtle large initial in the center */
+.barber-card--soon::before {
+    content: 'Y';
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    font-size: clamp(4rem, 10vw, 6rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: rgba(255,255,255,0.05);
+    text-transform: uppercase;
+    pointer-events: none;
+    line-height: 1;
+}
+
+.barber-name--dim {
+    color: rgba(255,255,255,0.38) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   EXPERIENCIA / SALON SECTION
+   ══════════════════════════════════════════════════════════════ */
+
+/* Top + bottom gradient: image fades in from top and out at bottom */
+.salon-img-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(
+        to bottom,
+        #09090b 0%,
+        transparent 35%,
+        transparent 65%,
+        #09090b 100%
+    );
+    pointer-events: none;
+}
+
+/* Gradient fade: image → black on the right edge (desktop) */
+.salon-img-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+        to right,
+        transparent 35%,
+        rgba(9,9,11,0.55) 70%,
+        #09090b 100%
+    );
+}
+
+/* On mobile the image sits above the text → fade to black at bottom */
+@media (max-width: 1023px) {
+    .salon-img-wrap::after {
+        background: linear-gradient(
+            to bottom,
+            transparent 50%,
+            rgba(9,9,11,0.7) 80%,
+            #09090b 100%
+        );
+    }
+}
+
+/* Tilt active state (JS-controlled) */
+.barber-card.tilt-active {
+    transition: transform 0.08s ease-out, box-shadow 0.2s ease;
+    box-shadow: 0 32px 60px rgba(0,0,0,0.45);
+}
+
