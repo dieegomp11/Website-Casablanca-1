@@ -136,10 +136,11 @@ lucide.createIcons();
         'imagenes/gallery_bombilla.jpg',
     ];
 
+    const mobile = window.innerWidth < 768;
     const rows = [
-        { cls: 'film-ltr',            dur: '30s' },
-        { cls: 'film-rtl',            dur: '42s' },
-        { cls: 'film-ltr film-slow',  dur: '56s' },
+        { cls: 'film-ltr',            dur: mobile ? '16s' : '30s' },
+        { cls: 'film-rtl',            dur: mobile ? '22s' : '42s' },
+        { cls: 'film-ltr film-slow',  dur: mobile ? '30s' : '56s' },
     ];
 
     rows.forEach(({ cls, dur }) => {
