@@ -7,7 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap">
     <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://maps.google.com; connect-src 'none';">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <script src="https://unpkg.com/lucide@0.475.0/dist/umd/lucide.min.js"></script>
 </head>
 <body class="bg-white text-zinc-900 font-['Outfit'] selection:bg-zinc-900 selection:text-white overflow-x-hidden w-full">
     <!-- Grain noise overlay -->
@@ -34,14 +36,14 @@
 
             <!-- Right: hamburger on mobile | Galería·Contacto + Reservar on desktop -->
             <div class="flex items-center justify-end w-10 md:w-auto md:flex-1">
-                <button class="md:hidden p-2 -mr-2" id="mobile-menu-btn">
+                <button type="button" class="md:hidden p-2 -mr-2" id="mobile-menu-btn">
                     <i data-lucide="menu" class="w-8 h-8"></i>
                 </button>
                 <div class="hidden md:flex items-center gap-12 text-[11px] font-bold uppercase tracking-[0.2em]" id="nav-links">
                     <a href="#galeria" class="hover:text-zinc-400 transition-colors">Galería</a>
                     <a href="#contacto" class="hover:text-zinc-400 transition-colors">Contacto</a>
                 </div>
-                <a href="https://wa.me/34617091500" target="_blank" id="nav-cta" class="hidden md:block ml-auto px-8 py-3 bg-white text-black text-[11px] font-black uppercase tracking-widest hover:bg-zinc-200 transition-all">
+                <a href="https://wa.me/34617091500" target="_blank" rel="noopener noreferrer" id="nav-cta" class="hidden md:block ml-auto px-8 py-3 bg-white text-black text-[11px] font-black uppercase tracking-widest hover:bg-zinc-200 transition-all">
                     Reservar
                 </a>
             </div>
@@ -51,7 +53,7 @@
     
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="fixed inset-0 bg-black text-white z-[60] flex flex-col items-center justify-center gap-10 translate-x-full transition-transform duration-500 md:hidden">
-        <button class="absolute top-8 right-8" id="close-menu-btn">
+        <button type="button" class="absolute top-8 right-8" id="close-menu-btn">
             <i data-lucide="x" class="w-10 h-10"></i>
         </button>
         <a href="#inicio" class="text-4xl font-black uppercase tracking-tighter mobile-link">Inicio</a>
@@ -95,7 +97,7 @@
                 </p>
 
                 <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center animate-fade-in delay-500">
-                    <a href="https://wa.me/34617091500" target="_blank" class="btn-cta w-full sm:w-auto px-16 py-6 bg-white text-black font-black uppercase tracking-widest hover:bg-zinc-100 hover:-translate-y-2">
+                    <a href="https://wa.me/34617091500" target="_blank" rel="noopener noreferrer" class="btn-cta w-full sm:w-auto px-16 py-6 bg-white text-black font-black uppercase tracking-widest hover:bg-zinc-100 hover:-translate-y-2">
                         Reservar Cita
                     </a>
                     <a href="#servicios" class="btn-cta w-full sm:w-auto px-16 py-6 border border-white text-white font-black uppercase tracking-widest hover:bg-white hover:text-black hover:-translate-y-2">
@@ -479,7 +481,7 @@
                         </div>
 
                         <div class="pt-4 md:pt-8 block reveal reveal-up" data-delay="300">
-                            <a href="https://wa.me/34617091500" class="btn-cta inline-flex items-center gap-4 px-8 md:px-12 py-5 md:py-6 bg-white text-black font-black uppercase tracking-widest hover:bg-zinc-100 text-sm">
+                            <a href="https://wa.me/34617091500" target="_blank" rel="noopener noreferrer" class="btn-cta inline-flex items-center gap-4 px-8 md:px-12 py-5 md:py-6 bg-white text-black font-black uppercase tracking-widest hover:bg-zinc-100 text-sm">
                                 <span>WhatsApp Directo</span>
                                 <i data-lucide="arrow-right" class="w-5 h-5"></i>
                             </a>
@@ -489,12 +491,13 @@
                         </div>
                     </div>
                     
-                    <a href="https://maps.google.com/maps?q=Calle+Juan+Sebastián+Elcano,+59,+02005+Albacete" target="_blank" class="relative group block reveal reveal-right" data-delay="200">
+                    <a href="https://maps.google.com/maps?q=Calle+Juan+Sebastián+Elcano,+59,+02005+Albacete" target="_blank" rel="noopener noreferrer" class="relative group block reveal reveal-right" data-delay="200">
                          <div class="relative bg-zinc-100 aspect-video md:aspect-[3/1] lg:aspect-[4/5] w-full flex items-center justify-center border border-zinc-600 overflow-hidden">
-                            <iframe 
-                                src="https://maps.google.com/maps?q=Calle%20Juan%20Sebasti%C3%A1n%20Elcano,%2059,%20Albacete&t=&z=16&ie=UTF8&iwloc=near&output=embed" 
-                                class="w-full h-full border-0 absolute inset-0 pointer-events-none" 
-                                allowfullscreen="" 
+                            <iframe
+                                src="https://maps.google.com/maps?q=Calle%20Juan%20Sebasti%C3%A1n%20Elcano,%2059,%20Albacete&t=&z=16&ie=UTF8&iwloc=near&output=embed"
+                                title="Ubicación Barbería Casablanca en Google Maps"
+                                class="w-full h-full border-0 absolute inset-0 pointer-events-none"
+                                referrerpolicy="no-referrer-when-downgrade"
                                 loading="lazy">
                             </iframe>
                             <div class="absolute inset-0 pointer-events-none shadow-[inset_0_0_20px_rgba(0,0,0,0.1)] bg-black/0 group-hover:bg-black/10 transition-colors duration-500"></div>
@@ -523,17 +526,17 @@
 
     <!-- Lightbox Modal -->
     <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 items-center justify-center hidden opacity-0 transition-opacity duration-300">
-        <button id="lightbox-close" class="absolute top-6 right-6 text-white/50 hover:text-white transition-colors cursor-pointer z-10">
+        <button type="button" id="lightbox-close" class="absolute top-6 right-6 text-white/50 hover:text-white transition-colors cursor-pointer z-10">
             <i data-lucide="x" class="w-8 h-8"></i>
         </button>
         
-        <button id="lightbox-prev" class="absolute left-6 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors cursor-pointer z-10">
+        <button type="button" id="lightbox-prev" class="absolute left-6 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors cursor-pointer z-10">
             <i data-lucide="chevron-left" class="w-10 h-10"></i>
         </button>
         
         <img id="lightbox-img" src="" alt="Gallery Fullscreen" class="max-h-[90vh] max-w-[90vw] object-contain relative z-0">
         
-        <button id="lightbox-next" class="absolute right-6 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors cursor-pointer z-10">
+        <button type="button" id="lightbox-next" class="absolute right-6 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors cursor-pointer z-10">
             <i data-lucide="chevron-right" class="w-10 h-10"></i>
         </button>
     </div>
