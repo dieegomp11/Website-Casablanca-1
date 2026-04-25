@@ -81,6 +81,13 @@ body {
     .filmstrip-track { animation: none !important; }
 }
 
+@media (max-width: 767px) {
+    .filmstrip-row {
+        flex: none;
+        height: 110px;
+    }
+}
+
 /* ── Grain Noise Overlay ─────────────────────────────────────── */
 #grain {
     position: fixed;
