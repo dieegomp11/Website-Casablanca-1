@@ -77,6 +77,15 @@ body {
     user-select: none;
 }
 
+@media (max-width: 767px) {
+    .filmstrip-track {
+        align-items: center;
+    }
+    .filmstrip-img {
+        height: 90px;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .filmstrip-track { animation: none !important; }
 }
