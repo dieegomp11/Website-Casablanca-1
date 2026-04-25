@@ -84,7 +84,14 @@ body {
 @media (max-width: 767px) {
     .filmstrip-row {
         flex: none;
-        height: 110px;
+        height: 80px;
+    }
+    .filmstrip-track {
+        height: 80px;
+    }
+    .filmstrip-img {
+        height: 80px;
+        width: auto;
     }
 }
 
