@@ -137,10 +137,17 @@ lucide.createIcons();
     ];
 
     const mobile = window.innerWidth < 768;
-    const rows = [
-        { cls: 'film-ltr',           dur: mobile ? '16s' : '30s' },
-        { cls: 'film-rtl',           dur: mobile ? '22s' : '42s' },
-        { cls: 'film-ltr film-slow', dur: mobile ? '30s' : '56s' },
+    const rows = mobile ? [
+        { cls: 'film-ltr',           dur: '13s' },
+        { cls: 'film-rtl',           dur: '18s' },
+        { cls: 'film-ltr film-slow', dur: '24s' },
+        { cls: 'film-rtl',           dur: '16s' },
+        { cls: 'film-ltr',           dur: '21s' },
+        { cls: 'film-rtl film-slow', dur: '28s' },
+    ] : [
+        { cls: 'film-ltr',           dur: '30s' },
+        { cls: 'film-rtl',           dur: '42s' },
+        { cls: 'film-ltr film-slow', dur: '56s' },
     ];
 
     rows.forEach(({ cls, dur }) => {
